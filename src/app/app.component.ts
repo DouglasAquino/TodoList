@@ -11,20 +11,17 @@ export class AppComponent {
   descricao=null;
   abertas=[];
   concluidas=[];
-  editando=null;
+  editandoTodo: Todo = null;
   
-
   salvar(){
-    if(this.editando){
-
-      this.editando.descricao=this.descricao;
+    if(this.editandoTodo){
+      this.editandoTodo.descricao=this.descricao;
     }
     else{
-      let d = new Todo(this.descricao);
-
+      const d = new Todo(this.descricao);
       this.abertas.push(d);
     }
-    this.editando=null;
+    this.editandoTodo=null;
     this.descricao=null;
     
   }
@@ -35,15 +32,11 @@ export class AppComponent {
   }
   
   excluir(todo: Todo){
-    if(this.editando == todo){
+    if(this.editandoTodo === todo){
       alert('Impossivel excluir durante a execução!');
-    }
-
-    else{
+    }else{
       if(confirm('Tarefa ainda aberta, tem certeza que deseja excluir?')){
-
-        let a = this.abertas.indexOf(todo);
-
+        const a = this.abertas.indexOf(todo);
         this.abertas.splice(a,1);
       }
     }
@@ -51,19 +44,18 @@ export class AppComponent {
 
   excluirConcluidas(todo: Todo){
     if(confirm('Você está prestes a deletar uma tarefa concluida, tem certeza?')){
-      let c = this.concluidas.indexOf(todo);
-
+      const c = this.concluidas.indexOf(todo);
       this.concluidas.splice(c,1);
     }
   }
-  editar(todo: Todo){
-    this.editando=todo;
 
-    this.descricao=todo.descricao;
-  }
-  cancelar(){
-    this.editando=null;
+  cancelar(): void{
+    this.editandoTodo=null;
     this.descricao=null;
-    
+  }
+
+  editar(todo: Todo){
+    this.editandoTodo=todo;
+    this.descricao=todo.descricao;
   }
 }
