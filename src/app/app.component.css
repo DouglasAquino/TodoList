@@ -1,0 +1,8 @@
+li {
+    list-style:none;
+    padding:5px;
+}
+#completas li {
+    text-decoration: line-through;
+    color: #888;
+}

@@ -1,0 +1,40 @@
+<h1>Todo List</h1>
+
+  <h2>Cadastrar Todo</h2>
+    <form #cadastro="ngForm" (submit)="salvar()">
+      <label for="descricao">Todo </label>
+      <input id="descricao" name="descricao" [(ngModel)]="descricao" required>
+      <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid">
+        Salvar
+      </button>
+      <button type="reset" class="btn btn-primary" (click)="cancelar()">
+        Cancelar
+      </button>
+    </form>
+
+  <h2>Abertas</h2>
+    <ul id="pendentes">
+      <li *ngFor="let item of abertas;">
+        <input type="checkbox" name="checkbox" (change)="executar(item)">
+          {{ item.descricao }} 
+        <button type="button" class="btn btn-primary"(click)="excluir(item)">
+          Excluir 
+        </button > 
+        <button type="button" class="btn btn-primary" (click)="editar(item)">
+          Editar
+        </button>
+      </li>
+    </ul>
+
+  <h2>Concluidas</h2>
+    <ul id="completas">
+      <li *ngFor="let item of concluidas;">
+        <input type="checkbox" name="checkbox" checked >
+          {{ item.descricao }} 
+        <button type="button" class="btn btn-primary"(click)="excluirConcluidas(item)">
+          Excluir
+        </button>
+      </li>
+    </ul>
+
+
